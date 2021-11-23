@@ -8,7 +8,7 @@ typedef struct {
     char name[40], last_Name[40];
     char cin[10];
     float money;
-    }add,check,transaction;
+    }add,check,transaction,account[200];
 
     add ad;
     check chec;
@@ -184,9 +184,11 @@ if(test!=1)
 
 
 void seeAccount(){
-    FILE *ptr;
-    int choice, i=0, test=0;
-    ptr=fopen("record.txt","r");
+    struct account temp;
+    FILE *acc;
+    int choice, i=0, size, test=0;
+    char cop;
+    acc=fopen("record.txt","r");
     printf("\n\n\t1.Display in ascending order.\n");
     printf("\n\n\t2.Display in descending order.\n");
     printf("\n\n\t3.Display in ascending order accounts with a min of :\n");
@@ -196,6 +198,30 @@ void seeAccount(){
 
     if (choice==1)
     {
+        while(cop!=EOF)
+        {
+            fscanf(acc,"%s %s %s %f", account[i].cin, account[i].name, account[i].last_Name, &account[i].money);
+            cop=fgetc(acc);
+            i++;
+        }
+            size=i-1;
+
+            for(i=1; i<size; ++i)
+            for(j=0; j<size-i; j++)
+            if(account[j+1].money<account[j].money)
+            {
+            temp=account[j];
+            account[j]=account[j+1];
+            account[j+1]=temp;
+            }
+
+            acc=fopen("accounSorted.txt","w");
+
+            for(i=0; i<size; i++)
+            fprintf(acc,"%s %s %s %f", account[i].cin, account[i].name, account[i].last_Name, &account[i].money);
+
+        }
+
 
 
 
@@ -210,7 +236,7 @@ void seeAccount(){
 
 
 
-}
+
 
 
 
