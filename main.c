@@ -64,13 +64,13 @@ void multi_acc()
 {
     int num_acc;
     FILE *ptr;
-    ptr=fopen("record.txt","a+");
     system("cls");
     printf("\n Enter the number of accounts you want to add: \n");
     scanf("%d", &num_acc);
     for (i=0; i<num_acc; i++)
     {
         cin:
+        ptr=fopen("record.txt","a+");
         printf("Enter the account CIN: \n");
         scanf("%s", chec.cin);
         while(fscanf(ptr,"%s %s %s %f", ad.cin, ad.name, ad.last_Name, &ad.money)!=EOF);
@@ -89,9 +89,10 @@ void multi_acc()
         scanf("%f", &ad.money);
 
         fprintf(ptr,"%s %s %s %f\n", ad.cin, ad.name, ad.last_Name, ad.money);
+        fclose(ptr);
     }
 
-    fclose(ptr);
+
     printf("\nAccount created successfully.\n");
     invald:
     printf("\n\n\n\tEnter 1 to go to the main menu and 0 to exit:");
@@ -114,7 +115,7 @@ void transact(void)
     int choice,test=0;
     FILE *oldrec, *newrec;
     oldrec=fopen("record.txt","r");
-    newrec=fopen("new.txt","w");
+    newrec=fopen("new.txt","a");
     printf("\nEnter the CIN of the costumer: ");
     scanf("%s", trans.cin);
     while (fscanf(oldrec,"%s", ad.cin)!=EOF)
