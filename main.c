@@ -185,13 +185,13 @@ if(test!=1)
 
 void seeAccount(){
     FILE *ptr;
-    int choice, test=0;
+    int choice, i=0, test=0;
     ptr=fopen("record.txt","r");
     printf("\n\n\t1.Display in ascending order.\n");
     printf("\n\n\t2.Display in descending order.\n");
-    printf("\n\n\t3.Display in ascending order accounts with a min of :");
-    printf("\n\n\t4.Display in descending order accounts with a min of :");
-    printf("\n\n\t5.Search by CIN.");
+    printf("\n\n\t3.Display in ascending order accounts with a min of :\n");
+    printf("\n\n\t4.Display in descending order accounts with a min of :\n");
+    printf("\n\n\t5.Search by CIN\n.");
     scanf("%d", &choice);
 
     if (choice==1)
