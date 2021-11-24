@@ -8,11 +8,15 @@ typedef struct {
     char name[40], last_Name[40];
     char cin[10];
     float money;
-    }add,check,transaction,account[200];
+    }add,check,transaction,accounts[100],temp_account;
+
+
 
     add ad;
     check chec;
     transaction trans;
+    accounts account;
+    temp_account temp_acc;
 
 
 void new_acc()
@@ -181,14 +185,11 @@ if(test!=1)
 }
 
 
-
-
 void seeAccount(){
-    struct account temp;
     FILE *acc;
-    int choice, i=0, size, test=0;
-    char cop;
+    int choice, i=0, size;
     acc=fopen("record.txt","r");
+    char cc;
     printf("\n\n\t1.Display in ascending order.\n");
     printf("\n\n\t2.Display in descending order.\n");
     printf("\n\n\t3.Display in ascending order accounts with a min of :\n");
@@ -198,28 +199,25 @@ void seeAccount(){
 
     if (choice==1)
     {
-        while(cop!=EOF)
+        while(cc!=EOF)
         {
             fscanf(acc,"%s %s %s %f", account[i].cin, account[i].name, account[i].last_Name, &account[i].money);
-            cop=fgetc(acc);
+            cc=fgetc(acc);
             i++;
         }
-            size=i-1;
-
-            for(i=1; i<size; ++i)
-            for(j=0; j<size-i; j++)
-            if(account[j+1].money<account[j].money)
-            {
-            temp=account[j];
+        size=i-1;
+        for(i=1; i<size; i++)
+        for(j=0; j<size-i; j++)
+        if(account[j+1].money<account[j].money)
+        {
+            temp_acc=account[j];
             account[j]=account[j+1];
-            account[j+1]=temp;
-            }
-
-            acc=fopen("accounSorted.txt","w");
-
-            for(i=0; i<size; i++)
-            fprintf(acc,"%s %s %s %f", account[i].cin, account[i].name, account[i].last_Name, &account[i].money);
-
+            account[j+1]=temp_acc;
+        }
+        acc=fopen("sorted_accounts","w");
+        for(i=0; i<size; i++)
+            fprintf(acc,"%s %s %s %f", account[i].cin, account[i].name, account[i].last_Name, account[i].money);
+            printf("\n File sorted !");
         }
 
 
@@ -243,12 +241,9 @@ void seeAccount(){
 
 
 
-
-
-
-
-
-
+void quit(){
+    exit(0);
+}
 
 
 void menu(){
@@ -274,6 +269,8 @@ void menu(){
             case 3:transact();
             break;
             case 4:seeAccount();
+            break;
+            case 6:quit();
             break;
 
 
