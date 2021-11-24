@@ -203,6 +203,7 @@ void seeAccount(){
         {
             fscanf(acc,"%s %s %s %f", account[i].cin, account[i].name, account[i].last_Name, &account[i].money);
             cc=fgetc(acc);
+
             i++;
         }
         size=i-1;
@@ -218,24 +219,26 @@ void seeAccount(){
         }
         acc=fopen("sorted_accending.txt","w");
         for(i=0; i<size; i++)
-            fprintf(acc,"%s %s %s %f\n", account[i].cin, account[i].name, account[i].last_Name, account[i].money);
+            fprintf(acc,"%s %s %s %f;\n", account[i].cin, account[i].name, account[i].last_Name, account[i].money);
             printf("\n File sorted !");
+            fclose(acc);
 
     }
     if(choice==2){
         //Bubble sort
-        int s=0;
         while(cc!=EOF)
             {
                 fscanf(acc,"%s %s %s %f", account[i].cin, account[i].name, account[i].last_Name, &account[i].money);
                 cc=fgetc(cc);
-                s++;
+                printf("\n%f\n",account[i].money);
+                i++;
             }
-
-            for(i=1; i<s-1; i++){
-            for(j=0; j<s-i-1; j++)
+            size=i-1;
+            for(i=1; i<size; ++i){
+            for(j=0; j<size-i; j++)
             if(account[j+1].money>account[j].money)
             {
+
                 temp_acc=account[j];
                 account[j]=account[j+1];
                 account[j+1]=temp_acc;
@@ -246,9 +249,6 @@ void seeAccount(){
         for (i=0; i<size; i++)
             fprintf(acc,"%s %s %s %f\n", account[i].cin, account[i].name, account[i].last_Name, account[i].money);
             printf("\n File sorted !");
-
-
-
 
     }
 
@@ -262,22 +262,8 @@ void seeAccount(){
 
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 void quit(){
-    printf("----- This project is developed by Elmahdi GLIOUINE -----");
+    printf("----- This project is developed by Elmahdi GLIOUINE -----\n");
     exit(0);
 }
 
@@ -316,6 +302,8 @@ void menu(){
 
         }
 }
+
+
 int  main ()
 {
 
