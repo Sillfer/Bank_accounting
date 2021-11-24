@@ -10,14 +10,11 @@ typedef struct {
     float money;
     }add,check,transaction,accounts[100],temp_account;
 
-
-
     add ad;
     check chec;
     transaction trans;
     accounts account;
     temp_account temp_acc;
-
 
 void new_acc()
 {
@@ -61,7 +58,6 @@ void new_acc()
         printf("\nInvalid!\n");
         goto add_invalid;
     }
-
 }
 
 void multi_acc()
@@ -96,7 +92,6 @@ void multi_acc()
         fclose(ptr);
     }
 
-
     printf("\nAccount created successfully.\n");
     invald:
     printf("\n\n\n\tEnter 1 to go to the main menu and 0 to exit:");
@@ -109,9 +104,7 @@ void multi_acc()
     else{
         printf("\nInvalid!");
         goto invald;
-
     }
-
 }
 
 void transact(void)
@@ -152,7 +145,6 @@ remove("record.txt");
 rename("new.txt","record.txt");
 if(test!=1)
 {
-
     printf("\n\nRecord not found!\n");
     Invalid_transact:
     printf("\n\nEnter 1. to return to main menu.\n Enter 2. to exit.\n Enter 3. to try again.\n");
@@ -184,7 +176,6 @@ if(test!=1)
 
 }
 
-
 void seeAccount(){
     FILE *acc;
     int choice, i=0, size;
@@ -210,7 +201,6 @@ void seeAccount(){
         for(i=1; i<size; ++i){
         for(j=0; j<size-i; j++)
         if(account[j+1].money<account[j].money)
-
         {
             temp_acc=account[j];
             account[j]=account[j+1];
@@ -222,7 +212,6 @@ void seeAccount(){
             fprintf(acc,"%s %s %s %f;\n", account[i].cin, account[i].name, account[i].last_Name, account[i].money);
             printf("\n File sorted !");
             fclose(acc);
-
     }
     if(choice==2){
         //Bubble sort
@@ -241,24 +230,19 @@ void seeAccount(){
                 temp_acc=account[j];
                 account[j]=account[j+1];
                 account[j+1]=temp_acc;
-
             }
             }
         acc=fopen("sorted_decending.txt","w");
         for (i=0; i<size; i++){
             fprintf(acc,"%s %s %s %f\n", account[i].cin, account[i].name, account[i].last_Name, account[i].money);
             printf("\n File sorted !");}
-
     }
-
     }
-
 
 void quit(){
     printf("----- This project is developed by Elmahdi GLIOUINE -----\n");
     exit(0);
 }
-
 
 void menu(){
     int choice;
@@ -275,7 +259,6 @@ void menu(){
         system("cls");
         switch(choice)
         {
-
             case 1:new_acc();
             break;
             case 2:multi_acc();
@@ -286,15 +269,8 @@ void menu(){
             break;
             case 6:quit();
             break;
-
-
-
-
-
-
         }
 }
-
 
 int  main ()
 {
