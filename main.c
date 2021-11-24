@@ -130,7 +130,7 @@ void transact(void)
         scanf("%d", &choice);
         if (choice==1)
         {
-            printf("Hello Enter the amount you want to deposit: ");
+            printf("Enter the amount you want to deposit: ");
             scanf("%f", &trans.money);
             ad.money+=trans.money;
             fprintf(newrec,"%s %s %s %f", ad.cin, ad.name, ad.last_Name, ad.money);
@@ -198,7 +198,7 @@ void seeAccount(){
     scanf("%d", &choice);
 
     if (choice==1)
-    {
+    { //Bubble sort
         while(cc!=EOF)
         {
             fscanf(acc,"%s %s %s %f", account[i].cin, account[i].name, account[i].last_Name, &account[i].money);
@@ -206,19 +206,46 @@ void seeAccount(){
             i++;
         }
         size=i-1;
-        for(i=1; i<size; i++)
+        for(i=1; i<size; ++i){
         for(j=0; j<size-i; j++)
         if(account[j+1].money<account[j].money)
+
         {
             temp_acc=account[j];
             account[j]=account[j+1];
             account[j+1]=temp_acc;
         }
-        acc=fopen("sorted_accounts","w");
-        for(i=0; i<size; i++)
-            fprintf(acc,"%s %s %s %f", account[i].cin, account[i].name, account[i].last_Name, account[i].money);
-            printf("\n File sorted !");
         }
+        acc=fopen("sorted_accending.txt","w");
+        for(i=0; i<size; i++)
+            fprintf(acc,"%s %s %s %f\n", account[i].cin, account[i].name, account[i].last_Name, account[i].money);
+            printf("\n File sorted !");
+
+    }
+    if(choice==2){
+        //Bubble sort
+        int s=0;
+        while(cc!=EOF)
+            {
+                fscanf(acc,"%s %s %s %f", account[i].cin, account[i].name, account[i].last_Name, &account[i].money);
+                cc=fgetc(cc);
+                s++;
+            }
+
+            for(i=1; i<s-1; i++){
+            for(j=0; j<s-i-1; j++)
+            if(account[j+1].money>account[j].money)
+            {
+                temp_acc=account[j];
+                account[j]=account[j+1];
+                account[j+1]=temp_acc;
+
+            }
+            }
+        acc=fopen("sorted_decending.txt","w");
+        for (i=0; i<size; i++)
+            fprintf(acc,"%s %s %s %f\n", account[i].cin, account[i].name, account[i].last_Name, account[i].money);
+            printf("\n File sorted !");
 
 
 
@@ -226,6 +253,14 @@ void seeAccount(){
     }
 
 
+
+
+
+
+
+
+
+}
 
 
 
@@ -242,6 +277,7 @@ void seeAccount(){
 
 
 void quit(){
+    printf("----- This project is developed by Elmahdi GLIOUINE -----");
     exit(0);
 }
 
@@ -286,4 +322,5 @@ int  main ()
 menu();
 return 0;
 }
+
 
