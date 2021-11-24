@@ -5,18 +5,18 @@ int main_exit;
 void menu ();
 void close();
 typedef struct {
-    char name[40], last_Name[40];
+    char name[40], last_Name[40];                       //Structure for the client
     char cin[10];
     float money;
     }add,check,transaction,accounts[100],temp_account;
 
     add ad;
     check chec;
-    transaction trans;
+    transaction trans;          //Declaration
     accounts account;
     temp_account temp_acc;
 
-void new_acc()
+void new_acc()      //One New account
 {
     FILE *ptr;
     ptr=fopen("record.txt","a+");
@@ -32,7 +32,7 @@ void new_acc()
         goto cin;
         }
     }
-    strcpy(ad.cin,chec.cin);
+    strcpy(ad.cin,chec.cin);  //Copies the string to the destination
     printf("\n Enter the name:\n");
     scanf("%s", ad.name);
     printf("\n Enter the last name:\n");
@@ -40,7 +40,7 @@ void new_acc()
     printf("\n Enter the amount that you want to start with (DH):\n");
     scanf("%f", &ad.money);
 
-    fprintf(ptr,"%s %s %s %f\n", ad.cin, ad.name, ad.last_Name, ad.money);
+    fprintf(ptr,"%s %s %s %f\n", ad.cin, ad.name, ad.last_Name, ad.money);  //Prints the account in the file.txt
 
     fclose(ptr);
     printf("\nAccount created successfully!\n");
@@ -60,7 +60,7 @@ void new_acc()
     }
 }
 
-void multi_acc()
+void multi_acc()    //Multiple accounts
 {
     int num_acc;
     FILE *ptr;
@@ -73,14 +73,14 @@ void multi_acc()
         ptr=fopen("record.txt","a+");
         printf("Enter the account CIN: \n");
         scanf("%s", chec.cin);
-        while(fscanf(ptr,"%s %s %s %f", ad.cin, ad.name, ad.last_Name, &ad.money)!=EOF);
+        while(fscanf(ptr,"%s %s %s %f", ad.cin, ad.name, ad.last_Name, &ad.money)!=EOF);  //Scans ptr for the end of file
         {
             if(strcmp(chec.cin,ad.cin)==0)
             {printf("\nCIN already in use!\n");
             goto cin;
             }
         }
-        strcpy(ad.cin,chec.cin);
+        strcpy(ad.cin,chec.cin);    //Copies the string to the destination and returns the copied string
         printf("\n Enter the name:\n");
         scanf("%s", ad.name);
         printf("\n Enter the last name:\n");
@@ -93,7 +93,7 @@ void multi_acc()
     }
 
     printf("\nAccount created successfully.\n");
-    invald:
+    invald:  //for goto
     printf("\n\n\n\tEnter 1 to go to the main menu and 0 to exit:");
     scanf("%d", &main_exit);
     system("cls");
@@ -107,7 +107,7 @@ void multi_acc()
     }
 }
 
-void transact(void)
+void transact(void)    //transaction :Deposit and withdrawal
 {
     int choice,test=0;
     FILE *oldrec, *newrec;
@@ -121,7 +121,7 @@ void transact(void)
     {test=1;
         printf("\n\nDo you want to \n1.Deposit.\n2 Withdraw.\n\nEnter you choice:");
         scanf("%d", &choice);
-        if (choice==1)
+        if (choice==1)              //Deposit
         {
             printf("Enter the amount you want to deposit: ");
             scanf("%f", &trans.money);
@@ -129,7 +129,7 @@ void transact(void)
             fprintf(newrec,"%s %s %s %f", ad.cin, ad.name, ad.last_Name, ad.money);
             printf("\n\nDeposited successfully!");
         }
-        else
+        else                        //Withdrawal
         {
             printf("Enter the amount you want to withdraw: ");
             scanf("%f", &trans.money);
@@ -139,7 +139,7 @@ void transact(void)
         }
     }
 }
-fclose(oldrec);
+fclose(oldrec);     //closes pointers
 fclose(newrec);
 remove("record.txt");
 rename("new.txt","record.txt");
@@ -176,7 +176,7 @@ if(test!=1)
 
 }
 
-void seeAccount(){
+void seeAccount(){    //Account sorting
     FILE *acc;
     int choice, i=0, size;
     acc=fopen("record.txt","r");
@@ -193,12 +193,12 @@ void seeAccount(){
         while(cc!=EOF)
         {
             fscanf(acc,"%s %s %s %f", account[i].cin, account[i].name, account[i].last_Name, &account[i].money);
-            cc=fgetc(acc);
+            cc=fgetc(acc);   //Obtain input one character at a time
 
             i++;
         }
         size=i-1;
-        for(i=1; i<size; ++i){
+        for(i=1; i<size; ++i){    //sorting
         for(j=0; j<size-i; j++)
         if(account[j+1].money<account[j].money)
         {
@@ -209,7 +209,7 @@ void seeAccount(){
         }
         acc=fopen("sorted_accending.txt","w");
         for(i=0; i<size; i++)
-            fprintf(acc,"%s %s %s %f;\n", account[i].cin, account[i].name, account[i].last_Name, account[i].money);
+            fprintf(acc,"%s %s %s %f;\n", account[i].cin, account[i].name, account[i].last_Name, account[i].money);   //prints in the file
             printf("\n File sorted !");
             fclose(acc);
     }
@@ -244,7 +244,7 @@ void quit(){
     exit(0);
 }
 
-void menu(){
+void menu(){                //Main menu
     int choice;
         printf("\n\n\t\tACCOUNT BANKING MANAGEMENT SYSTEM");
         printf("\n\n\n\t\t*******WELCOME TO THE MAIN MENU*******");
