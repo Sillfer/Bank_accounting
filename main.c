@@ -238,7 +238,6 @@ void seeAccount(){
             for(j=0; j<size-i; j++)
             if(account[j+1].money>account[j].money)
             {
-
                 temp_acc=account[j];
                 account[j]=account[j+1];
                 account[j+1]=temp_acc;
@@ -246,21 +245,14 @@ void seeAccount(){
             }
             }
         acc=fopen("sorted_decending.txt","w");
-        for (i=0; i<size; i++)
+        for (i=0; i<size; i++){
             fprintf(acc,"%s %s %s %f\n", account[i].cin, account[i].name, account[i].last_Name, account[i].money);
-            printf("\n File sorted !");
+            printf("\n File sorted !");}
 
     }
 
+    }
 
-
-
-
-
-
-
-
-}
 
 void quit(){
     printf("----- This project is developed by Elmahdi GLIOUINE -----\n");
