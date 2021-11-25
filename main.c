@@ -19,7 +19,7 @@ typedef struct {
 void new_acc()      //One New account
 {
     FILE *ptr;
-    ptr=fopen("record.txt","a+");
+    ptr=fopen("record.txt","a+");           //Searches file if opened successfully load and set up pointer for last chara
     cin:
     system("cls");
     printf("\t\t\t -------ADD RECORD------ \n");
@@ -40,7 +40,7 @@ void new_acc()      //One New account
     printf("\n Enter the amount that you want to start with (DH):\n");
     scanf("%f", &ad.money);
 
-    fprintf(ptr,"%s %s %s %f\n", ad.cin, ad.name, ad.last_Name, ad.money);  //Prints the account in the file.txt
+    fprintf(ptr,"\n%s %s %s %f\n", ad.cin, ad.name, ad.last_Name, ad.money);  //Prints the account in the file.txt
 
     fclose(ptr);
     printf("\nAccount created successfully!\n");
@@ -75,7 +75,7 @@ void multi_acc()    //Multiple accounts
         scanf("%s", chec.cin);
         while(fscanf(ptr,"%s %s %s %f", ad.cin, ad.name, ad.last_Name, &ad.money)!=EOF);  //Scans ptr for the end of file
         {
-            if(strcmp(chec.cin,ad.cin)==0)
+            if(strcmp(chec.cin,ad.cin)==0)              //if the two strings are equal the function returns 0
             {printf("\nCIN already in use!\n");
             goto cin;
             }
@@ -111,8 +111,8 @@ void transact(void)    //transaction :Deposit and withdrawal
 {
     int choice,test=0;
     FILE *oldrec, *newrec;
-    oldrec=fopen("record.txt","r");
-    newrec=fopen("new.txt","a");
+    oldrec=fopen("record.txt","r");                 //Searches file if opened successfully load and set up pointer for first chara
+    newrec=fopen("new.txt","a");                    //Searches file if opened successfully load and set up pointer for last chara
     printf("\nEnter the CIN of the costumer: ");
     scanf("%s", trans.cin);
     while (fscanf(oldrec,"%s", ad.cin)!=EOF)
@@ -207,11 +207,18 @@ void seeAccount(){    //Account sorting
             account[j+1]=temp_acc;
         }
         }
-        acc=fopen("sorted_accending.txt","w");
+        acc=fopen("sorted_accending.txt","w");   //Searches file if it exists it's contents are overwritten
         for(i=0; i<size; i++)
             fprintf(acc,"%s %s %s %f;\n", account[i].cin, account[i].name, account[i].last_Name, account[i].money);   //prints in the file
             printf("\n File sorted !");
             fclose(acc);
+            printf("\nEnter 1. to go to the main menu and 0. to exit\n");
+        scanf("%d", &main_exit);
+        system("cls");
+        if (main_exit==1)
+            menu();
+        else
+            close();
     }
     if(choice==2){
         //Bubble sort
@@ -278,5 +285,3 @@ int  main ()
 menu();
 return 0;
 }
-
-
